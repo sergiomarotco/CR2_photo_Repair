@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("repair bad CR2 photos")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("sergiomarotco@gmail.com")]
-[assembly: AssemblyProduct("CR2FotoRepair")]
+[assembly: AssemblyProduct("CR2_photo_Repair")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

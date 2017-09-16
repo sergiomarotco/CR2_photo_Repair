@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CR2FotoRepair.Properties {
+namespace CR2_photo_Repair.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

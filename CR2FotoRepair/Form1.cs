@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace CR2FotoRepair
+namespace CR2_photo_Repair
 {
     public partial class Form1 : Form
     {
@@ -15,13 +14,8 @@ namespace CR2FotoRepair
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog d = new OpenFileDialog()
-            {
-                DefaultExt = ".cr2",
-                Filter = "CR2 files (*.cr2)|*.cr2|All files (*.*)|*.*",
-                CheckFileExists = true,
-                InitialDirectory = Environment.SpecialFolder.Desktop.ToString()
-            };
+            //d.Filter = "CR2 photos (*.cr2)|*.cr2|All files (*.*)|*.*";
+            d.InitialDirectory = Environment.SpecialFolder.Desktop.ToString();            
             DialogResult result = d.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -38,7 +32,7 @@ namespace CR2FotoRepair
         {
             FolderBrowserDialog F = new FolderBrowserDialog()
             {
-                Description = "Выберите папку с фотографиями *.cr2 которые необходимо восстановить",
+                Description = "Choose a folder with *.cr2 photos to be restored",
                 ShowNewFolderButton = true,
                 RootFolder = Environment.SpecialFolder.Desktop
             };
@@ -51,7 +45,7 @@ namespace CR2FotoRepair
                 }
                 else
                 {
-                    MessageBox.Show("Выбрана несуществующая папка");
+                    MessageBox.Show("A non-existent folder is selected");
                 }
             }
         }
