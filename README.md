@@ -6,3 +6,7 @@ With this free software you cant try to repair jper from corruped raw cr2 photo 
 
 <a href="http://www.picshare.ru/view/8283590/" target="_blank"><img src="http://www.picshare.ru/uploads/170916/q8HA82a34I.jpg" border="0" width="600" height="112" title="Хостинг картинок PicShare.ru"></a>
 <a href="http://www.picshare.ru/view/8283618/" target="_blank"><img src="http://www.picshare.ru/uploads/170916/ZRu0g8uohc.jpg" border="0" width="600" height="112" title="Хостинг картинок PicShare.ru"></a>
+
+1. Выберите фотографию снятую на этот же фотоаппарат и желательно с теми же настройками
+2. Выберите папку с поврежденными фотографиями (не выбирайте оригинальную папку с поврежденными фотографиями, выберите папку с копиями поврежденных фотографий)
+3. Восстановите фотографии
