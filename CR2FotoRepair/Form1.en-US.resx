@@ -137,7 +137,7 @@
     <value>"CR2 photos (*.cr2)|*.cr2|All files (*.*)|*.*"</value>
   </data>
   <data name="d.Title" xml:space="preserve">
-    <value>Choose a folder with photos * .cr2 to be restored</value>
+    <value>Choose not corrupted cr2 photo</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Repair photo CR2</value>

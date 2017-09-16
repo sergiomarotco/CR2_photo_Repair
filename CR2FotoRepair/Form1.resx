@@ -133,7 +133,7 @@
     <value>0</value>
   </data>
   <data name="button1.Text" xml:space="preserve">
-    <value>Выберите исправное изображение</value>
+    <value>Выберите исправное фото</value>
   </data>
   <data name="&gt;&gt;button1.Name" xml:space="preserve">
     <value>button1</value>
@@ -313,7 +313,7 @@
     <value>CR2 фотографии (*.cr2)|*.cr2|Все файлы (*.*)|*.*</value>
   </data>
   <data name="d.Title" xml:space="preserve">
-    <value>Выберите папку с фотографиями *.cr2 которые необходимо восстановить</value>
+    <value>Выберите не поврежденную *.cr2 фотографию</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

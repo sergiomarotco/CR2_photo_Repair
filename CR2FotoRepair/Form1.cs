@@ -11,7 +11,7 @@ namespace CR2_photo_Repair
         {
             InitializeComponent();
         }
-
+        //ddd
         private void Button1_Click(object sender, EventArgs e)
         {
             //d.Filter = "CR2 photos (*.cr2)|*.cr2|All files (*.*)|*.*";
@@ -32,7 +32,7 @@ namespace CR2_photo_Repair
         {
             FolderBrowserDialog F = new FolderBrowserDialog()
             {
-                Description = "Choose a folder with *.cr2 photos to be restored",
+                Description = "Choose a folder with *.cr2 corrupted photos to be restored",
                 ShowNewFolderButton = true,
                 RootFolder = Environment.SpecialFolder.Desktop
             };
@@ -76,43 +76,46 @@ namespace CR2_photo_Repair
             {
                 try
                 {
-                    FileInfo ff = new FileInfo(badFiles[i]);
-                    Directory.CreateDirectory(ff.Directory.ToString() + @"\\repaired2");
-                    newfilename = ff.Directory + "\\" + ff.Name.Split('.')[0] + "..JPG";
-                    File.Copy(badFiles[i], newfilename, true);
-                    badFiles[i] = newfilename;
-                    byte[] BadfotoWithoutLeft = new byte[1];
-                    byte[] foto = File.ReadAllBytes(badFiles[i]);
-                    /**/            //foto = new byte[] { 209,210, 211, 255, 216, 255, 196, 255, 216, 255, 196, 212, 213,214,215 };
-                    List<int> jIndexes = new List<int>();
-                    for (int j = 0; j < foto.Length; j++)
+                    if (badFiles[i] != Goodfoto)
                     {
-                        if (foto[j] == 255)
-                            if (foto[j + 1] == 216)
-                                if (foto[j + 2] == 255)
-                                    if (foto[j + 3] == 196)
-                                        jIndexes.Add(j);
+                        FileInfo ff = new FileInfo(badFiles[i]);
+                        Directory.CreateDirectory(ff.Directory.ToString() + @"\\repaired2");
+                        newfilename = ff.Directory + "\\" + ff.Name.Split('.')[0] + "..JPG";
+                        File.Copy(badFiles[i], newfilename, true);
+                        badFiles[i] = newfilename;
+                        byte[] BadfotoWithoutLeft = new byte[1];
+                        byte[] foto = File.ReadAllBytes(badFiles[i]);
+                        /**/            //foto = new byte[] { 209,210, 211, 255, 216, 255, 196, 255, 216, 255, 196, 212, 213,214,215 };
+                        List<int> jIndexes = new List<int>();
+                        for (int j = 0; j < foto.Length; j++)
+                        {
+                            if (foto[j] == 255)
+                                if (foto[j + 1] == 216)
+                                    if (foto[j + 2] == 255)
+                                        if (foto[j + 3] == 196)
+                                            jIndexes.Add(j);
 
                             jIndexes.Add(j);
+                        }
+                        if (jIndexes.Count != 0)
+                        {
+                            NotRepairedFoto++;
+                            BadfotoWithoutLeft = new byte[foto.Length - jIndexes[jIndexes.Count - 1]];
+                            Array.Copy(foto, jIndexes[jIndexes.Count - 1], BadfotoWithoutLeft, 0, foto.Length - jIndexes[jIndexes.Count - 1]);
+                            byte[] NewFoto = new byte[BadfotoWithoutLeft.Length + GoodfotoWithoutRight.Length];
+                            Array.Copy(GoodfotoWithoutRight, 0, NewFoto, 0, GoodfotoWithoutRight.Length);
+                            Array.Copy(BadfotoWithoutLeft, 0, NewFoto, GoodfotoWithoutRight.Length, BadfotoWithoutLeft.Length);
+                            File.WriteAllBytes(newfilename, NewFoto);
+                            File.Move(newfilename, ff.Directory + "\\repaired2\\" + ff.Name.Split('.')[0] + "......CR2");
+                            File.Delete(newfilename);
+                            newfilename = ff.Directory + "\\repaired2\\" + ff.Name.Split('.')[0] + "......CR2";
+                            File.WriteAllBytes(newfilename, NewFoto);
+                        }
+                        else
+                        { File.Delete(ff.Directory + "\\" + ff.Name.Split('.')[0] + "......CR2"); NotRepairedFotostring += ff.FullName + Environment.NewLine; }
                     }
-                    if (jIndexes.Count != 0)
-                    {
-                        NotRepairedFoto++;
-                        BadfotoWithoutLeft = new byte[foto.Length - jIndexes[jIndexes.Count - 1]];
-                        Array.Copy(foto, jIndexes[jIndexes.Count - 1], BadfotoWithoutLeft, 0, foto.Length - jIndexes[jIndexes.Count - 1]);
-                        byte[] NewFoto = new byte[BadfotoWithoutLeft.Length + GoodfotoWithoutRight.Length];
-                        Array.Copy(GoodfotoWithoutRight, 0, NewFoto, 0, GoodfotoWithoutRight.Length);
-                        Array.Copy(BadfotoWithoutLeft, 0, NewFoto, GoodfotoWithoutRight.Length, BadfotoWithoutLeft.Length);
-                        File.WriteAllBytes(newfilename, NewFoto);
-                        File.Move(newfilename, ff.Directory + "\\repaired2\\" + ff.Name.Split('.')[0] + "......CR2");
-                        File.Delete(newfilename);
-                        newfilename = ff.Directory + "\\repaired2\\" + ff.Name.Split('.')[0] + "......CR2";
-                        File.WriteAllBytes(newfilename, NewFoto);
-                    }
-                    else
-                    { File.Delete(ff.Directory + "\\" + ff.Name.Split('.')[0] + "......CR2"); NotRepairedFotostring += ff.FullName + Environment.NewLine; }
                 }
-                catch (Exception ee) { MessageBox.Show(ee.Message + Environment.NewLine + Environment.NewLine + ee.ToString()); }
+                catch (Exception ee) { MessageBox.Show(ee.Message + Environment.NewLine + Environment.NewLine + ee.ToString()); }            
             }
         }
 
